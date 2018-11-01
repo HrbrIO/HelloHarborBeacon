@@ -1,0 +1,15 @@
+{
+  "name": "HelloHarborBeacon",
+  "version": "1.0.0",
+  "description": "The Hello World of Harbor Beacons.",
+  "main": "index.js",
+  "repository": "https://github.com/HrbrIO/HelloHarborBeacon.git",
+  "author": "Mitch Kahn",
+  "license": "MIT",
+  "dependencies": {
+    "superagent": "^4.0.0-beta.5"
+  },
+  "scripts": {
+    "post": "node index.js"
+  }
+}
