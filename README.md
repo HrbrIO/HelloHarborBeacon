@@ -19,7 +19,7 @@ your achievement.
 
 It's all described in the `index.js` file, and check out the video tutorial - coming soon.
 
-(P.S. if your a Python person, that's coming soon.)
+(P.S. if you're a Python person, that's coming soon.)
 
 ## Installing and Running the App
 
