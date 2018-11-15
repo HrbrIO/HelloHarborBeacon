@@ -4,7 +4,7 @@
  Function:   HelloHarborBeacon!
  Copyright:  hrbr.io
  Date:       11/1/18 2:49 PM
- Author:     mkahn
+ Author:     Mitch Kahn
 
  Example to properly use the beacon message post endpoint in Harbor.
 
@@ -18,8 +18,8 @@ const SERVERS = {
     staging: 'https://harbor-stream-staging.herokuapp.com/beacon'
 };
 
-// Normally you would never use staging, but if you're an alpha or pre-alpha tester, it's cool.
-const USE_SERVER = 'staging';
+// Normally you would never use staging. So don't. Seriously, it will get you nowhere.
+const USE_SERVER = 'production';
 
 // Dictionary abuse
 const POST_URL = SERVERS[USE_SERVER];
@@ -27,7 +27,7 @@ const POST_URL = SERVERS[USE_SERVER];
 
 // You find your API key on the website by clicking on the icon with your avatar (far right of nav bar) then
 // selecting API Keys. Enter it here.
-const API_KEY = 'GET-YOUR_API-KEY_FROM_WEBSITE';
+const API_KEY = 'GET_YOUR_API-KEY_FROM_WEBSITE';
 
 // Now you need to have a valid appVersionId. To get one, create an app in your account. appVersionId's use a naming
 // convention similar to a lot of bundle/docker ids which is a combination of RDNS and semantic versioning. Example:
