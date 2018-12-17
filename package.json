@@ -7,7 +7,7 @@
   "author": "Mitch Kahn",
   "license": "MIT",
   "dependencies": {
-    "superagent": "^4.0.0-beta.5"
+    "superagent": "^3.0.0"
   },
   "scripts": {
     "post": "node index.js"
