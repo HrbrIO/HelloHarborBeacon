@@ -11,11 +11,12 @@
  **********************************/
 
 const request = require('superagent');
+const util = require('util');
 
 // These endpoints will change once we exit Alpha
 const SERVERS = {
-    production: 'https://harbor-stream.herokuapp.com/beacon',
-    staging: 'https://harbor-stream-staging.herokuapp.com/beacon'
+    production: 'https://harbor-stream.hrbr.io/beacon',
+    staging: 'https://harbor-stream-staging.hrbr.io/beacon'
 };
 
 // Normally you would never use staging. So don't. Seriously, it will get you nowhere.
@@ -62,7 +63,6 @@ const DATA_PAYLOAD = {
 };
 
 // Let's POST up that bad boy.
-
 request.post(POST_URL)
     .send(DATA_PAYLOAD)
     // always a good idea to be explicit about what you want back!
@@ -73,7 +73,7 @@ request.post(POST_URL)
     .set('beaconMessageType', BEACON_MESSAGE_TYPE)
     // dataTimestamp is optional. If you don't set it, Harbor will mark it with the arrival time of the message.
     // However, if you are caching messages for a while before sending, you will want to set this with the time
-    // at which the parameters were actually measured. 
+    // at which the parameters were actually measured.
     .set('dataTimestamp', new Date().getTime())
     // beaconVersionId also goes in the header
     .set('beaconVersionId', BEACON_VERSION_ID)
@@ -83,11 +83,12 @@ request.post(POST_URL)
     .set('beaconInstanceId', BEACON_INSTANCE_ID)
     .then( resp => {
         console.log("Yay! You said hello!!!");
+        console.log(util.inspect(resp));
     })
     .catch( err => {
         // If this barfs out a 400, odds are you have: 1) the wrong API key, 2) the wrong appVersionId setup in your account,
         // 3) the wrong beaconVersionId in your app in your account.
         console.error(`Uh oh, something bad happened! ${err.message}`);
         console.error(`Code: ${err.status}`)
-        if (err.status==400) console.log('A 400 error is usually a mismatch between API Key, appVersionId and beaconVersionId. Check these in the code and online.');
-    })
+        if (err.status===400) console.log('A 400 error is usually a mismatch between API Key, appVersionId and beaconVersionId. Check these in the code and online.');
+    });
