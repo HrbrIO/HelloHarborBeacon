@@ -55,39 +55,66 @@ const BEACON_MESSAGE_TYPE = 'HELLO_HARBOR';
 const BEACON_INSTANCE_ID = 'MY-COOL-COMPUTER';
 
 
+// This function POSTs up a JSON message.
+function sendBeaconMessage(payload){
+
+    request.post(POST_URL)
+        .send(payload)
+        // always a good idea to be explicit about what you want back!
+        .set('Accept', 'application/json')
+        // API Key goes in the header like so.
+        .set('apikey', API_KEY)
+        // Soe does beacon message type
+        .set('beaconMessageType', BEACON_MESSAGE_TYPE)
+        // dataTimestamp is optional. If you don't set it, Harbor will mark it with the arrival time of the message.
+        // However, if you are caching messages for a while before sending, you will want to set this with the time
+        // at which the parameters were actually measured.
+        .set('dataTimestamp', new Date().getTime())
+        // beaconVersionId also goes in the header
+        .set('beaconVersionId', BEACON_VERSION_ID)
+        // appVersionId does too
+        .set('appVersionId', APP_VERSION_ID)
+        // and beaconInstanceId
+        .set('beaconInstanceId', BEACON_INSTANCE_ID)
+        .then(resp => {
+            console.log("Yay! You said hello!!!");
+            console.log(util.inspect(resp));
+        })
+        .catch(err => {
+            // If this barfs out a 400, odds are you have: 1) the wrong API key, 2) the wrong appVersionId setup in your account,
+            // 3) the wrong beaconVersionId in your app in your account.
+            console.error(`Uh oh, something bad happened! ${err.message}`);
+            console.error(`Code: ${err.status}`)
+            if (err.status === 400) console.log('A 400 error is usually a mismatch between API Key, appVersionId and beaconVersionId. Check these in the code and online.');
+        });
+
+}
+
 // We'll need a data payload for our beacon message. Let's send something very useful like a random number.
 const DATA_PAYLOAD = {
     random: Math.random(),
     message: "Hello Harbor, what's shaking?"
 };
 
-// Let's POST up that bad boy.
-request.post(POST_URL)
-    .send(DATA_PAYLOAD)
-    // always a good idea to be explicit about what you want back!
-    .set('Accept', 'application/json')
-    // API Key goes in the header like so.
-    .set('apikey', API_KEY)
-    // Soe does beacon message type
-    .set('beaconMessageType', BEACON_MESSAGE_TYPE)
-    // dataTimestamp is optional. If you don't set it, Harbor will mark it with the arrival time of the message.
-    // However, if you are caching messages for a while before sending, you will want to set this with the time
-    // at which the parameters were actually measured.
-    .set('dataTimestamp', new Date().getTime())
-    // beaconVersionId also goes in the header
-    .set('beaconVersionId', BEACON_VERSION_ID)
-    // appVersionId does too
-    .set('appVersionId', APP_VERSION_ID)
-    // and beaconInstanceId
-    .set('beaconInstanceId', BEACON_INSTANCE_ID)
-    .then( resp => {
-        console.log("Yay! You said hello!!!");
-        console.log(util.inspect(resp));
-    })
-    .catch( err => {
-        // If this barfs out a 400, odds are you have: 1) the wrong API key, 2) the wrong appVersionId setup in your account,
-        // 3) the wrong beaconVersionId in your app in your account.
-        console.error(`Uh oh, something bad happened! ${err.message}`);
-        console.error(`Code: ${err.status}`)
-        if (err.status===400) console.log('A 400 error is usually a mismatch between API Key, appVersionId and beaconVersionId. Check these in the code and online.');
-    });
+// Send it
+sendBeaconMessage(DATA_PAYLOAD);
+
+// Uncomment the code below for the charting tutorial
+
+// function sendLoop(count){
+//
+//     for (let idx=0; idx<count; idx++){
+//         setTimeout(()=>{
+//             const message = `Hello #${idx} from Harbor`;
+//             console.log(message);
+//             const payload = { message, random: Math.random() };
+//             sendBeaconMessage(payload);
+//         }, 500*idx);
+//     }
+//
+// }
+//
+// sendLoop(5);
+
+
+

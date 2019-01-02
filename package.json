@@ -1,6 +1,6 @@
 {
   "name": "HelloHarborBeacon",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "The Hello World of Harbor Beacons.",
   "main": "index.js",
   "repository": "https://github.com/HrbrIO/HelloHarborBeacon.git",
