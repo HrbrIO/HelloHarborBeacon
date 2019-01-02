@@ -13,7 +13,6 @@
 const request = require('superagent');
 const util = require('util');
 
-// These endpoints will change once we exit Alpha
 const SERVERS = {
     production: 'https://harbor-stream.hrbr.io/beacon',
     staging: 'https://harbor-stream-staging.hrbr.io/beacon'
