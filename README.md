@@ -12,6 +12,7 @@ your monitoring data to Harbor using nothing more than an HTTP POST. No agents t
 In order to POST a monitoring message to Harbor, you need to have a few things correct to "get in the front door":
 1) A registered `appVersionId`. You create this when you create an App through the online portal.
 2) A registered `beaconVersionId`. You create this when add a Beacon to an App, also through the online portal.
+  - The default `beaconVersionId` for HelloHarbor is `io.hrbr.howdybeacon:1.0.0`.  
 3) Your API Key which is...wait for it...available through the online portal.
 
 You use the above to create a properly formatted post, POST it to the beacon message endpoint, then sit back and enjoy 
