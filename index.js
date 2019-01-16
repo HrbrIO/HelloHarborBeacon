@@ -64,7 +64,7 @@ function sendBeaconMessage(payload){
         .set('Accept', 'application/json')
         // API Key goes in the header like so.
         .set('apikey', API_KEY)
-        // Soe does beacon message type
+        // So does beacon message type
         .set('beaconMessageType', BEACON_MESSAGE_TYPE)
         // dataTimestamp is optional. If you don't set it, Harbor will mark it with the arrival time of the message.
         // However, if you are caching messages for a while before sending, you will want to set this with the time
@@ -78,7 +78,7 @@ function sendBeaconMessage(payload){
         .set('beaconInstanceId', BEACON_INSTANCE_ID)
         .then(resp => {
             console.log("Yay! You said hello!!!");
-            console.log(util.inspect(resp));
+            console.log(util.inspect(resp.body));
         })
         .catch(err => {
             // If this barfs out a 400, odds are you have: 1) the wrong API key, 2) the wrong appVersionId setup in your account,
@@ -101,20 +101,20 @@ sendBeaconMessage(DATA_PAYLOAD);
 
 // Uncomment the code below for the charting tutorial
 
-// function sendLoop(count){
-//
-//     for (let idx=0; idx<count; idx++){
-//         setTimeout(()=>{
-//             const message = `Hello #${idx} from Harbor`;
-//             console.log(message);
-//             const payload = { message, random: Math.random() };
-//             sendBeaconMessage(payload);
-//         }, 500*idx);
-//     }
-//
-// }
-//
-// sendLoop(5);
+function sendLoop(count){
+
+    for (let idx=0; idx<count; idx++){
+        setTimeout(()=>{
+            const message = `Hello #${idx} from Harbor`;
+            console.log(message);
+            const payload = { message, random: Math.random() };
+            sendBeaconMessage(payload);
+        }, 500*idx);
+    }
+
+}
+
+sendLoop(5);
 
 
 
