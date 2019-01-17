@@ -19,7 +19,7 @@ const SERVERS = {
 };
 
 // Normally you would never use staging. So don't. Seriously, it will get you nowhere.
-const USE_SERVER = 'production';
+const USE_SERVER = 'staging';
 
 // Dictionary abuse
 const POST_URL = SERVERS[USE_SERVER];
@@ -27,7 +27,7 @@ const POST_URL = SERVERS[USE_SERVER];
 
 // You find your API key on the website by clicking on the icon with your avatar (far right of nav bar) then
 // selecting API Keys. Enter it here.
-const API_KEY = 'GET_YOUR_API-KEY_FROM_WEBSITE';
+const API_KEY = 'c5a80f3a4f2b39a0a43bd6ebc255847f';
 
 // Now you need to have a valid appVersionId. To get one, create an app in your account. appVersionId's use a naming
 // convention similar to a lot of bundle/docker ids which is a combination of RDNS and semantic versioning. Example:
@@ -78,7 +78,8 @@ function sendBeaconMessage(payload){
         .set('beaconInstanceId', BEACON_INSTANCE_ID)
         .then(resp => {
             console.log("Yay! You said hello!!!");
-            console.log(util.inspect(resp.body));
+            // Uncomment the below line to get a full inspection of your body printed to the console
+            // console.log(util.inspect(resp.body));
         })
         .catch(err => {
             // If this barfs out a 400, odds are you have: 1) the wrong API key, 2) the wrong appVersionId setup in your account,
