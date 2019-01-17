@@ -99,22 +99,21 @@ const DATA_PAYLOAD = {
 // Send it
 sendBeaconMessage(DATA_PAYLOAD);
 
-// Uncomment the code below for the charting tutorial
+// The below section sends the beacon message every 3 seconds for 5 minutes allowing you to test Foghorn and View functionality
 
-// function sendLoop(count){
-//
-//     for (let idx=0; idx<count; idx++){
-//         setTimeout(()=>{
-//             const message = `Hello #${idx} from Harbor`;
-//             console.log(message);
-//             const payload = { message, random: Math.random() };
-//             sendBeaconMessage(payload);
-//         }, 500*idx);
-//     }
-//
-// }
-//
-// sendLoop(5);
+function sendLoop(count){
 
+     for (let idx=0; idx<count; idx++){
+         setTimeout(()=>{
+             const message = `Hello #${idx} from Harbor`;
+             console.log(message);
+             const payload = { message, random: Math.random() };
+             sendBeaconMessage(payload);
+         }, 3000*idx);
+     }
+
+ }
+
+ sendLoop(100);
 
 
