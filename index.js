@@ -60,8 +60,9 @@ function sendBeaconMessage(payload){
 
     request.post(POST_URL)
         .send(payload)
+        .type('json')        
         // always a good idea to be explicit about what you want back!
-        .set('Accept', 'application/json')
+        .accept('json')
         // API Key goes in the header like so.
         .set('apikey', API_KEY)
         // So does beacon message type
@@ -104,7 +105,7 @@ sendBeaconMessage(DATA_PAYLOAD);
 
 function sendLoop(count){
 
-     for (let idx=0; idx<count; idx++){
+     for (let idx=1; idx<=count; idx++){
          setTimeout(()=>{
              const message = `Hello #${idx} from Harbor`;
              console.log(message);
